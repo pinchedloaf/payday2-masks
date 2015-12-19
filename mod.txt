@@ -1,0 +1,16 @@
+{
+  "name" : "masks",
+  "description" : "masks",
+  "author" : "pinchedloaf",
+  "contact" : "pinchedloafs@gmail.com",
+  "version" : "0.1",
+  "keybinds" : [{
+    "keybind_id" : "masks",
+    "name" : "Masks",
+    "description" : "Give some mask stuff.",
+    "script_path" : "masks.lua",
+    "run_in_menu" : false,
+    "run_in_game" : true,
+    "localized" : false
+  }]
+}
