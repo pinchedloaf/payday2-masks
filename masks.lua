@@ -1,47 +1,76 @@
--- pattern (infamous)
---115 - cat   -- infamous 
+log("Dumping mask data ...")
 
---material (infamous)
---44 = gold_clean 
---1 - titanium
---50 - rainbow
---33 - radioactive
---38 - slime
+function DumpMask(table)
+	for k,v in pairs(table) do
+		if type(v) ~= "table" then
+			if k == "global_value" then
+				log("global_value: " .. v)
+			elseif k == "name_id" then
+				log("name_id: " .. v)
+			elseif k == "inaccessible" then
+				if v then
+				  log("inaccessible: TRUE")
+				end
+			end
+		end
+  end
+  log("----------------------")
+end
 
--- masks (normal)
---1 - gagball
---38 - alienware
---both normal
+-- Dump all masks in blackmarket, with needed values and if it is supposed to be
+-- inaccessible
+function DumpMasks()
+	for k,v in pairs(tweak_data.blackmarket.masks) do
+		if type(v) == "table" then
+			log("id: " .. k)
+			DumpMask(v)
+		end
+	end
+end
 
+-- Dump the raw mask lua table. ignore binary data (such as model placements)
+-- can be used for non-mask tables as well.
+-- DumpTable(tweak_data.blackmarket.masks,"")
+function DumpTable( table, offset )
+	for k,v in pairs(table) do
+		if type(v) == "table" then
+			log(offset .. "table: " .. k)
+			DumpTable(v, offset .. "--")
+    elseif type(v) == "boolean" then
+     	if v then
+    		log(offset .. "key: " .. k .. " = true")
+    	else
+    		log(offset .. "key: " .. k .. " = false")
+    	end
+    elseif type(v) == "userdata" then
+    	log(offset .. "key: " .. k .. " = userdata")
+    else
+    	log(offset .. "key: " .. k .. "  value: " .. v)
+    end
+  end
+  log("----------------------")
+end
 
-managers.blackmarket:add_to_inventory("normal", "masks", "gagball", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "gagball", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "gagball", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "alienware", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "alienware", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "alienware", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "alienware", false)
-managers.blackmarket:add_to_inventory("normal", "masks", "alienware", false)
+-- Dump your profiles current mask inventory, and count. This does not account
+-- for masks already created
+function DumpInventory()
+	for k,v in pairs(Global.blackmarket_manager.inventory) do
+		if type(v) == "table" then
+  		log("k: " .. k)
+	  else
+	    log("k: " .. k .. " v: " .. v)
+	  end
+	end
+end
 
-managers.blackmarket:add_to_inventory("infamous", "textures", "cat", false)
-managers.blackmarket:add_to_inventory("infamous", "textures", "cat", false)
-managers.blackmarket:add_to_inventory("infamous", "textures", "cat", false)
-managers.blackmarket:add_to_inventory("infamous", "textures", "cat", false)
-
-managers.blackmarket:add_to_inventory("infamous", "materials", "gold_clean", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "gold_clean", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "gold_clean", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "gold_clean", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "gold_clean", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "gold_clean", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "titanium", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "titanium", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "rainbow", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "radioactive", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "slime", false)
-managers.blackmarket:add_to_inventory("infamous", "materials", "slime", false)
-
--- Message on screen
-if managers.hud then
-   managers.hud:show_hint( { text = "Added" } )
-end 
+-- Dump your profiles current infamous mask inventory, and count. This does not
+-- account for masks already created
+function DumpInventoryInfamousMasks()
+	for k,v in pairs(Global.blackmarket_manager.inventory.infamous.masks) do
+	  if type(v) == "table" then
+		  log("k: " .. k)
+	  else
+	    log("k: " .. k .. " v: " .. v)
+	  end
+  end
+end
