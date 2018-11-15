@@ -14,4 +14,4 @@ Installation
 
 Notes
 -----
-Payday 2, Update 93+ (2015-12-18)
+Payday 2, Update 195+ (2018-11-08)
