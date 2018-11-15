@@ -1,17 +1,25 @@
 {
-  "name" : "masks",
-  "description" : "masks",
-  "author" : "pinchedloaf",
-  "contact" : "pinchedloafs@gmail.com",
-  "version" : "0.2",
+	"name" : "Masks",
+	"description" : "Masks.",
+	"author" : "pinchedloaf",
+	"contact" : "pinchedloafs@gmail.com",
+	"version" : "1.89.592.2",
   "blt_version" : 2,
   "keybinds" : [{
-    "keybind_id" : "masks",
-    "name" : "Masks",
-    "description" : "Give some mask stuff.",
-    "script_path" : "masks.lua",
-    "run_in_menu" : false,
-    "run_in_game" : true,
-    "localized" : false
+        "keybind_id" : "masks_list",
+        "name" : "List Mask ID's",
+        "description" : "Dump all known mask ID information to logs",
+        "script_path" : "masks.lua",
+        "run_in_menu" : true,
+        "run_in_game" : false,
+        "localized" : false
+  },{
+        "keybind_id" : "mask_give",
+        "name" : "Give Mask",
+        "description" : "Give specified mask",
+        "script_path" : "masks_give.lua",
+        "run_in_menu" : true,
+        "run_in_game" : false,
+        "localized" : false
   }]
 }
